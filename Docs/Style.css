@@ -1,0 +1,435 @@
+:root
+{
+	--text:			#221f20;
+	--link:			#98999d;
+	--mainbgr:		white;
+	--altbgr:		#eee;
+	--selection:	#aaa;
+	--warning:		red
+}
+
+html
+{
+	position:	relative;
+	min-height:	100%
+}
+
+body
+{
+	background-color:	var(--mainbgr) !important;
+	font-family:		Univers, Segoe UI, sans-serif
+}
+
+a:hover, body
+{
+	color:	var(--text) !important
+}
+
+h4, h5, h6, nav li
+{
+	font-weight:	700
+}
+
+footer, nav
+{
+	border-top:	1px solid var(--link)
+}
+
+@font-face
+{
+	font-family:	Univers;
+	src:			url(../Assets/Fonts/Univers.ttf);
+}
+
+@font-face
+{
+	font-family:	UniversBold;
+	src:			url(../Assets/Fonts/UniversBold.ttf);
+}
+
+::selection
+{
+	background-color:	var(--selection)
+}
+
+h4, h5, h6, strong
+{
+	font-family:	UniversBold, Segoe UI, sans-serif !important
+}
+
+a
+{
+	color:	var(--link) !important
+}
+
+a:hover
+{
+	text-decoration:	none !important
+}
+
+hr
+{
+	width:				auto;
+	background-color:	var(--text);
+	margin:				0 16px 0 0
+}
+
+nav
+{
+	margin:				3% 0;
+	background-color:	var(--mainbgr)
+}
+
+nav li
+{
+	margin:		0 5px;
+	font-size:	16px
+}
+
+footer
+{
+	position:		absolute;
+	bottom:			0;
+	width:			100%;
+	margin-top:		50px;
+	line-height:	35px;
+	font-size:		12px
+}
+
+footer div
+{
+	display:	table
+}
+
+footer span
+{
+	display:	table-cell
+}
+
+form
+{
+	margin-bottom:	30px
+}
+
+button[type=submit], input, textarea
+{
+	resize:				none !important;
+	width:				75%;
+	padding:			5px 8px;
+	border:				1px solid var(--text);
+	background-color:	var(--altbgr);
+	font-size:			12px !important
+}
+
+input:focus, textarea:focus
+{
+	outline:	var(--text) solid 2px
+}
+
+button:hover
+{
+	background-color:	var(--link)
+}
+
+textarea
+{
+	height:	160px
+}
+
+.separator
+{
+	display:	none;
+	padding:	.4rem 0;
+	color:		var(--link)
+}
+
+.curriculum
+{
+	margin-top:		-15px;
+	margin-bottom:	45px;
+	padding:		0 !important;
+	line-height:	150%
+}
+
+.curriculum li
+{
+	padding:	8px
+}
+
+.curriculum .headline
+{
+	margin-left:	13%
+}
+
+.curriculum .year
+{
+	width:			10%;
+	margin-right:	3%;
+	white-space:	nowrap;
+	text-align:		right;
+	font-size:		.7em
+}
+
+.curriculum .text
+{
+	width:	87%
+}
+
+.vertical-aligner
+{
+	display:		inline-block !important;
+	height:			100% !important;
+	vertical-align:	middle !important
+}
+
+.artwork-grid
+{
+	margin-bottom:	50px;
+	padding:		0 25px;
+	text-align:		center;
+	white-space:	nowrap
+}
+
+.artwork-grid img
+{
+	max-width:	100%
+}
+
+.artwork img, .artwork-info
+{
+	max-width:	55%
+}
+
+.artwork
+{
+	width:			100%;
+	margin-bottom:	15px;
+	text-align:		center
+}
+
+.artwork-info
+{
+	margin:		0 auto;
+	text-align:	left
+}
+
+.centered-span
+{
+	width:		100%;
+	text-align:	center
+}
+
+.control-icon
+{
+	position:	fixed
+}
+
+.control-icon i
+{
+	font-size:	32px
+}
+
+.control-left
+{
+	top:	50%;
+	left:	10%
+}
+
+.control-close
+{
+	top:	15%;
+	right:	5%
+}
+
+.control-right
+{
+	top:	50%;
+	right:	10%
+}
+
+.control-row
+{
+	display:	none;
+	margin-top:	-15px;
+	font-size:	24px
+}
+
+.control-row span
+{
+	display:	table-cell
+}
+
+@media(min-width:768px)
+{
+	.separator
+	{
+		display:	initial
+	}
+}
+
+@media(max-width:576px)
+{
+	nav
+	{
+		margin:	0 !important
+	}
+
+	strong
+	{
+		margin-right:	20px
+	}
+	
+	.curriculum
+	{
+		padding-left:	0 !important
+	}
+
+	.curriculum .headline
+	{
+		margin-left:	20%
+	}
+
+	.curriculum .year
+	{
+		width:			15%;
+		margin-right:	5%
+	}
+
+	.curriculum .text
+	{
+		width:	80%
+	}
+
+	.curriculum .vita-img
+	{
+		width:			20%;
+		margin-right:	5%
+	}
+
+	.curriculum .vita-headline
+	{
+		width:	75%
+	}
+
+	.artwork-grid
+	{
+		padding:	0
+	}
+
+	.artwork img
+	{
+		max-width:	100%
+	}
+
+	.artwork-info
+	{
+		max-width:	90%
+	}
+
+	.artwork-title
+	{
+		display:	block
+	}
+
+	.control-row
+	{
+		display:	table
+	}
+
+	.control-icon
+	{
+		display:	none
+	}
+
+	#vita-headline-text
+	{
+		font-size:	14px
+	}
+
+	#modal-link	{ pointer-events: none }
+}
+
+@media(min-width:577px)
+{
+	.header-content
+	{
+		position:	relative;
+		min-height:	100%
+	}
+
+	.bottom-content
+	{
+		position:	absolute;
+		bottom:		0;
+		left:		0
+	}
+
+	.curriculum
+	{
+		margin-left:	5%
+	}
+
+	.artwork-title
+	{
+		margin-right:	4%
+	}
+}
+
+.dropdown-item:active
+{
+	background-color:	var(--altbgr)
+}
+
+.navbar
+{
+	padding:	0 12px !important
+}
+
+.navbar-brand
+{
+	padding-top:	0 !important;
+	color:			var(--text) !important;
+	font-size:		32px
+}
+
+.navbar-brand:hover
+{
+	color:	var(--link) !important
+}
+
+.modal-dialog
+{
+	margin:		0 auto !important;
+	max-width:	100vw !important;
+	text-align:	center
+}
+
+.modal-dialog img
+{
+	max-height:	100vh
+}
+
+#vita-photo
+{
+	width:	100%
+}
+
+#return
+{
+	color:	var(--warning)
+}
+
+#impressum-link
+{
+	text-align:	right
+}
+
+#main-content
+{
+	padding:	30px 15px 60px
+}
+
+#start-img
+{
+	margin-bottom:	15px
+}

@@ -1,0 +1,17 @@
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+Header set Content-Security-Policy "default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/ https://maxcdn.bootstrapcdn.com/bootstrap/; script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/ https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/ https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/ https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/ https://www.googletagmanager.com/gtag/; img-src 'self' data:; font-src 'self' https://cdnjs.cloudflare.com/; frame-ancestors 'none'; base-uri 'none'; form-action 'self';"
+Header always set Public-Key-Pins "pin-sha256=\"base64+primary==\"; pin-sha256=\"base64+backup==\"; max-age=5184000; includeSubDomains"
+Header set X-Content-Type-Options nosniff
+Header set X-XSS-Protection "1; mode=block"
+Header append X-FRAME-OPTIONS "SAMEORIGIN"
+Header always set Referrer-Policy "no-referrer"
+
+RewriteEngine On
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteRule ^/*$ Code/Index.php
+RewriteRule ^([\w-]+)/*$ Code/Index.php?page=$1
+RewriteRule ^([\w-]+)/([\w-]+)/*$ Code/Index.php?page=$1&uri=$2
+RewriteRule ^[\w-]+/[\w-]+/[\w-/]+$ Code/Index.php?page=fehler
