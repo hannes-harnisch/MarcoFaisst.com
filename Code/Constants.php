@@ -1,8 +1,7 @@
 <?php
 
-const YEAR_SEPARATOR = "-";
-
-const YEAR_GROUPS =
+const YEAR_SEPARATOR	= "-";
+const YEAR_GROUPS		=
 [
 	"2019".YEAR_SEPARATOR."2020",
 	"2017".YEAR_SEPARATOR."2018",
@@ -11,19 +10,26 @@ const YEAR_GROUPS =
 	"2010".YEAR_SEPARATOR."2012"
 ];
 
-const NAVBAR_LINKS =
+const HOME_VIEW			= "start";
+const ILLUSTRATION_VIEW = "grafiken";
+const DRAWING_VIEW		= "zeichnungen";
+const ERROR_VIEW		= "fehler";
+
+const NAVBAR_LINKS		=
 [
-	"grafiken",
-	"zeichnungen",
+	ILLUSTRATION_VIEW,
+	DRAWING_VIEW,
 	"ausstellungen",
 	"vita",
 	"kontakt"
 ];
 
-const NAVBAR_GALLERIES =
+const NAVBAR_GALLERIES	=
 [
-	NAVBAR_LINKS[0],
-	NAVBAR_LINKS[1]
+	ILLUSTRATION_VIEW,
+	DRAWING_VIEW
 ];
+
+const UNTITLED			= "ohne Titel";
 
 ?>

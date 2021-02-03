@@ -8,13 +8,18 @@ abstract class View
 	abstract public function renderTitle() : string;
 	abstract public function renderBody() : string;
 
+	public static function isValidPage(string &$page) : bool
+	{
+		return in_array($page, YEAR_GROUPS) || in_array($page, NAVBAR_GALLERIES);
+	}
+
 	protected static function matchViewToTable(string &$page) : string
 	{
 		return match($page)
 		{
-			default			=> Database::PAINTING_TABLE,
-			NAVBAR_LINKS[0]	=> Database::ILLUSTRATION_TABLE,
-			NAVBAR_LINKS[1]	=> Database::DRAWING_TABLE
+			default				=> Database::PAINTING_TABLE,
+			ILLUSTRATION_VIEW	=> Database::ILLUSTRATION_TABLE,
+			DRAWING_VIEW		=> Database::DRAWING_TABLE
 		};
 	}
 }

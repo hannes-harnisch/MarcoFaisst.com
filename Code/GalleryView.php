@@ -29,16 +29,16 @@ class GalleryView extends View
 			$title = $work["title"];
 			$body .=
 <<<HTML
-				<div class='col-12 col-sm-4 artwork-grid'>
-					<span class='vertical-aligner'></span>
-					<a href='/$this->page/$id'>
-						<img src='/Assets/{$this->table}Preview/$id.jpg' alt='$title'>
-					</a>
-				</div>
+					<div class='col-12 col-sm-4 artwork-grid'>
+						<span class='vertical-aligner'></span>
+						<a href='/$this->page/$id'>
+							<img src='/Assets/{$this->table}Preview/$id.jpg' alt='$title'>
+						</a>
+					</div>
 HTML;
 
 			if($count % 3 == 0)
-				$body .="</div><div class='row'>";
+				$body .= "</div><div class='row'>";
 			$count++;
 		}
 

@@ -15,7 +15,7 @@ class ArtworkView extends View
 
 	public function renderTitle() : string
 	{
-		return Database::getTitle($this->table, $this->artId);
+		return Database::getTitle($this->table, $this->artId) ?? UNTITLED;
 	}
 
 	public function renderBody() : string
@@ -35,7 +35,7 @@ class ArtworkView extends View
 	{
 		$artworkExists = Database::artworkExists($this->table, $this->artId);
 		if(!$artworkExists)
-			throw new Exception();
+			throw new InvalidArgumentException();
 	}
 
 	private function assignArtworkDataAndNeighborIds(?string &$prevId, ?string &$artwork, ?string &$nextId)
@@ -44,12 +44,12 @@ class ArtworkView extends View
 		$artworkAndNeighbors = $this->queryArtworkWithNeighbors($ordinal);
 		foreach($artworkAndNeighbors as $row)
 		{
-		 	if($row["ordinal"] < $ordinal)
-		 		$nextId = $row["id"];
-		 	if($row["ordinal"] == $ordinal)
-		 		$artwork = $row;
-		 	if($row["ordinal"] > $ordinal)
-		 		$prevId = $row["id"];
+			if($row["ordinal"] < $ordinal)
+				$nextId = $row["id"];
+			if($row["ordinal"] == $ordinal)
+				$artwork = $row;
+			if($row["ordinal"] > $ordinal)
+				$prevId = $row["id"];
 		}
 	}
 
@@ -60,7 +60,7 @@ class ArtworkView extends View
 			$years = explode(YEAR_SEPARATOR, $this->page);
 		else
 			$years = [Database::MIN_YEAR, Database::MAX_YEAR];
-		
+
 		return Database::getArtworkWithNeighbors($this->table, $ordinal, $years[0], $years[1]);
 	}
 
@@ -69,24 +69,24 @@ class ArtworkView extends View
 		$body .=
 <<<HTML
 				<a class='navigator-icon navigator-close' href='/$this->page'>
-		 			<i class='fa fa-close'></i>
-				 </a>
+					<i class='fa fa-close'></i>
+				</a>
 HTML;
-		
+
 		if($prevId !== null)
 			$body .=
 <<<HTML
-				<a class='navigator-icon navigator-left' href='/$this->page/$prevId'>
-		 			<i class='fa fa-chevron-left'></i>
-				</a>
+					<a class='navigator-icon navigator-left' href='/$this->page/$prevId'>
+						<i class='fa fa-chevron-left'></i>
+					</a>
 HTML;
-		
+
 		if($nextId !== null)
 			$body .=
 <<<HTML
-				<a class='navigator-icon navigator-right' href='/$this->page/$nextId'>
-		 			<i class='fa fa-chevron-right'></i>
-				 </a>
+					<a class='navigator-icon navigator-right' href='/$this->page/$nextId'>
+						<i class='fa fa-chevron-right'></i>
+					</a>
 HTML;
 		$body .= "<div class='navigator-row'><span>";
 
@@ -100,27 +100,27 @@ HTML;
 
 		$body .=
 <<<HTML
-					</span><span class='centered-span'>
-						<a href='/$this->page'>
-							<i class='fa fa-close'></i>
-						</a>
-					</span><span>
+				</span><span class='centered-span'>
+					<a href='/$this->page'>
+						<i class='fa fa-close'></i>
+					</a>
+				</span><span>
 HTML;
-		
+
 		if($nextId !== null)
-			 $body .=
+			$body .=
 <<<HTML
 					<a href='/$this->page/$nextId'>
-		 				<i class='fa fa-chevron-right'></i>
+						<i class='fa fa-chevron-right'></i>
 					</a>
 HTML;
 
 		$body .= "</span></div>";
 	}
-	
+
 	private function renderArtwork(string &$body, array &$artwork)
 	{
-		$title = $artwork["title"];
+		$title = $artwork["title"] ?? UNTITLED;
 		$year = $artwork["year"];
 		$medium = $artwork["medium"];
 		$base = $artwork["base"] ?? null;
@@ -130,16 +130,17 @@ HTML;
 
 		$body .=
 <<<HTML
-					<div class='row'><div class='artwork'>
-		 				<a id='modal-link' href='#' data-toggle='modal' data-target='#work-display-modal'>
-		 					<img src='/Assets/$this->table/$id.jpg' alt='$title'>
-		 				</a>
-		 			</div></div>
-		 			<div class='row'><div class='artwork'>
-		 				<div class='artwork-info'>
-							<strong class='artwork-title'>$title</strong>$year, $medium
+				<div class='row'><div class='artwork'>
+					<a id='modal-link' href='#' data-toggle='modal' data-target='#work-display-modal'>
+						<img src='/Assets/$this->table/$id.jpg' alt='$title'>
+					</a>
+				</div></div>
+				<div class='row'><div class='artwork'>
+					<div class='artwork-info'>
+						<strong class='artwork-title'>$title</strong><br>
+						<div class='float-right'>$year, $medium
 HTML;
-		 
+
 		if($base !== null)
 			$body .= " auf $base";
 
@@ -152,12 +153,12 @@ HTML;
 
 		$body .=
 <<<HTML
-					</div></div></div>
-					<div class='modal fade' id='work-display-modal'>
-		 				<div class='modal-dialog'>
-		 					<img src='/Assets/$this->table/$id.jpg' alt='$title'>
-						</div>
+				</div></div></div></div>
+				<div class='modal fade' id='work-display-modal'>
+					<div class='modal-dialog'>
+						<img src='/Assets/$this->table/$id.jpg' alt='$title'>
 					</div>
+				</div>
 HTML;
 	}
 }

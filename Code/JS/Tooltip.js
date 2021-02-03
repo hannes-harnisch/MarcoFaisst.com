@@ -11,5 +11,5 @@ $(document).ready(function()
 	$(".info-k").attr("title", "Katalog");
 	$(".info-k").text("(K)");
 
-	$("[data-toggle='tooltip']").tooltip(); 
+	$("[data-toggle='tooltip']").tooltip();
 });

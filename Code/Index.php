@@ -1,36 +1,59 @@
 <?php
+
 require_once "ArtworkView.php";
 require_once "Constants.php";
 require_once "DocumentView.php";
 require_once "GalleryView.php";
-require_once "HomeView.php";
+
+set_error_handler(function($errno, $errstr, $errfile, $errline)
+{
+	throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+});
 
 $page = $_GET["page"] ?? null;
 $artId = $_GET["artId"] ?? null;
 
 $view;
 if(empty($_GET))
-	$view = new HomeView();
-elseif(!empty($artId))
+	$view = new DocumentView(HOME_VIEW);
+elseif(!empty($artId) && View::isValidPage($page))
 	$view = new ArtworkView($page, $artId);
-elseif(in_array($page, YEAR_GROUPS) || in_array($page, NAVBAR_GALLERIES))
+elseif(View::isValidPage($page))
 	$view = new GalleryView($page);
 else
 	$view = new DocumentView($page);
-?>
 
+$title; $body;
+try
+{
+	$title = $view->renderTitle();
+	$body = $view->renderBody();
+}
+catch(Exception $e)
+{
+	$view = new DocumentView(ERROR_VIEW);
+	$title = $view->renderTitle();
+	$body = $view->renderBody();
+}
+
+if(empty($_GET))
+	$title = "";
+else
+	$title .= " | ";
+
+?>
 <!DOCTYPE html>
 <html lang='de'>
 <head>
 	<meta charset='UTF-8'/>
 	<meta name='description' content='Freischaffender Maler und Grafiker.
-									  Ansässig in Stuttgart, geboren und aufgewachsen in der Schweiz.'/>
+									 Ansässig in Stuttgart, geboren und aufgewachsen in der Schweiz.'/>
 	<meta name='keywords' content='art,contemporary art,gemälde,painting,stuttgart,stuttgart art,kunst,malerei,grafik,
-								   graphik,grafiken,graphiken,drawing,drawings,maler,grafiker,graphiker,painter,
-								   künstler,artist,paint,bild,picture,image,marco,faisst,ausstellungen,ausstellung,
-								   freischaffend,freischaffender,freelancing,freelancer'/>
+								  graphik,grafiken,graphiken,drawing,drawings,maler,grafiker,graphiker,painter,
+								  künstler,artist,paint,bild,picture,image,marco,faisst,ausstellungen,ausstellung,
+								  freischaffend,freischaffender,freelancing,freelancer'/>
 	<meta name='viewport' content='width=device-width,initial-scale=1'/>
-	<meta name='author' content='Marco Faisst'/>	
+	<meta name='author' content='Marco Faisst'/>
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'/>
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css'/>
 	<link rel='stylesheet' href='/Docs/Style.css'/>
@@ -44,10 +67,7 @@ else
 	<title>
 
 		<?php
-		echo $view->renderTitle();
-
-		if(!$view instanceof HomeView)
-			echo " | ";
+		echo $title;
 		?>
 
 		Marco Faisst | Freischaffender Maler und Grafiker
@@ -68,7 +88,7 @@ else
 
 							<?php
 							foreach(YEAR_GROUPS as $yearGroup)
-								echo "<a class='dropdown-item' href='/$yearGroup'>$yearGroup</a>";	
+								echo "<a class='dropdown-item' href='/$yearGroup'>$yearGroup</a>";
 							?>
 
 						</div>
@@ -78,11 +98,10 @@ else
 					foreach(NAVBAR_LINKS as $navbarLink)
 					{
 						echo "<span class='separator'>|</span><li class='nav-item'><a ";
-						
 						if($page == $navbarLink)
 							echo "id='active-link' ";
-						$linkText = strtoupper($navbarLink);
 
+						$linkText = strtoupper($navbarLink);
 						echo "class='nav-link' href='/$navbarLink'>$linkText</a></li>";
 					}
 					?>
@@ -94,19 +113,7 @@ else
 	<div id='main-content' class='container'>
 
 		<?php
-		// set_error_handler(function($errno, $errstr, $errfile, $errline)
-		// {
-		//  	throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
-		// });
-
-		try
-		{
-			echo $view->renderBody();
-		}
-		catch(Exception $e)
-		{
-			require_once "../Docs/Fehler.htm";
-		}
+		echo $body;
 		?>
 
 	</div>
