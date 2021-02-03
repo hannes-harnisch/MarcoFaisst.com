@@ -11,7 +11,7 @@ const YEAR_GROUPS =
 	"2010".YEAR_GROUP_SEPARATOR."2012"
 ];
 
-const NAVBAR_PAGES =
+const NAVBAR_LINKS =
 [
 	"grafiken",
 	"zeichnungen",
@@ -22,8 +22,8 @@ const NAVBAR_PAGES =
 
 const NAVBAR_GALLERIES =
 [
-	NAVBAR_PAGES[0],
-	NAVBAR_PAGES[1]
+	NAVBAR_LINKS[0],
+	NAVBAR_LINKS[1]
 ];
 
 const ILLUSTRATION_TABLE = "illustration";
@@ -34,8 +34,8 @@ function matchPageToTable(string $page) : string
 {
 	return match($page)
 	{
-		NAVBAR_PAGES[0]	=> ILLUSTRATION_TABLE,
-		NAVBAR_PAGES[1]	=> DRAWING_TABLE,
+		NAVBAR_LINKS[0]	=> ILLUSTRATION_TABLE,
+		NAVBAR_LINKS[1]	=> DRAWING_TABLE,
 		default			=> PAINTING_TABLE
 	};
 }

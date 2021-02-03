@@ -13,12 +13,12 @@ class Gallery extends Page
 		$this->table = matchPageToTable($pageArg);
 	}
 
-	public function getTitle() : string
+	public function renderTitle() : string
 	{
 		return ucfirst($this->pageArg);
 	}
 
-	public function getBody() : string
+	public function renderBody() : string
 	{
 		$count = 1;
 		$body = "<div class='row'>";
@@ -27,17 +27,18 @@ class Gallery extends Page
 		{
 			$title = $work["title"];
 			$uri = $work["uri"];
-			$body .=
-				"<div class='col-12 col-sm-4 artwork-grid'>
+			$body .=			
+<<<HTML
+				<div class='col-12 col-sm-4 artwork-grid'>
 					<span class='vertical-aligner'></span>
 					<a href='/$this->pageArg/$uri'>
-						<img src='../Assets/{$this->table}Preview/$uri.jpg' alt='$title'>
+						<img src='/Assets/{$this->table}Preview/$uri.jpg' alt='$title'>
 					</a>
-				</div>";
-			
+				</div>
+HTML;			
 			if($count % 3 == 0)
-				$body .= "</div><div class='row'>";
-			
+				$body .="</div><div class='row'>";
+
 			$count++;
 		}
 
@@ -46,13 +47,18 @@ class Gallery extends Page
 
 	private function queryArtworks() : array
 	{
-		if(strcmp($this->table, PAINTING_TABLE) == 0)
+		return match($this->table)
 		{
-			$years = explode(YEAR_GROUP_SEPARATOR, $this->pageArg);
-			return Database::getPaintingTitlesAndUrisInYearRange($years[0], $years[1]);
-		}
-		else
-			return Database::getTitlesAndUris($this->table);
+			PAINTING_TABLE		=> $this->queryPaintingsByYear(),
+			ILLUSTRATION_TABLE	=> Database::getIllustrationTitlesAndUris(),
+			DRAWING_TABLE		=> Database::getDrawingTitlesAndUris()
+		};
+	}
+
+	private function queryPaintingsByYear() : array
+	{
+		$years = explode(YEAR_GROUP_SEPARATOR, $this->pageArg);
+		return Database::getPaintingTitlesAndUrisRanged($years[0], $years[1]);
 	}
 }
 

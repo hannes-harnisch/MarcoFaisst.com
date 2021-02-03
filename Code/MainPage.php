@@ -1,13 +1,15 @@
 <?php
 
+require_once "Page.php";
+
 class MainPage extends Page
 {
-	public function getTitle() : string
+	public function renderTitle() : string
 	{
 		return "";
 	}
 
-	public function getBody() : string
+	public function renderBody() : string
 	{
 		return file_get_contents("../Docs/Start.htm");
 	}

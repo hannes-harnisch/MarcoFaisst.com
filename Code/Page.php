@@ -2,8 +2,8 @@
 
 abstract class Page
 {
-	abstract public function getTitle() : string;
-	abstract public function getBody() : string;
+	abstract public function renderTitle() : string;
+	abstract public function renderBody() : string;
 }
 
 ?>

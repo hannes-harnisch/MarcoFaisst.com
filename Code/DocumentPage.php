@@ -1,5 +1,7 @@
 <?php
 
+require_once "Page.php";
+
 class DocumentPage extends Page
 {
 	private string $docTitle;
@@ -9,12 +11,12 @@ class DocumentPage extends Page
 		$this->docTitle = ucfirst($pageArg);
 	}
 
-	public function getTitle() : string
+	public function renderTitle() : string
 	{
 		return $this->docTitle;
 	}
 
-	public function getBody() : string
+	public function renderBody() : string
 	{
 		return file_get_contents("../Docs/$this->docTitle.htm");
 	}

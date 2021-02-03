@@ -8,12 +8,13 @@
 }
 @font-face {
 	font-family:		Univers;
-	src:				url(../Private/Univers.ttf);
+	src:				url(/Private/Univers.ttf);
 }
 @font-face {
 	font-family:		UniversBold;
-	src:				url(../Private/UniversBold.ttf);
+	src:				url(/Private/UniversBold.ttf);
 }
+
 ::selection {
 	background-color:	var(--selection);
 }
@@ -89,6 +90,7 @@ button:hover {
 textarea {
 	height:				160px;
 }
+
 .separator {
 	display:			none;
 	padding:			.4rem 0;
@@ -117,9 +119,9 @@ textarea {
 	width:				87%;
 }
 .vertical-aligner {
-	display:			inline-block !important;
-	height:				100% !important;
-	vertical-align:		middle !important;
+	display:			inline-block;
+	height:				100%;
+	vertical-align:		middle;
 }
 .artwork-grid {
 	margin-bottom:		50px;
@@ -127,207 +129,168 @@ textarea {
 	text-align:			center;
 	white-space:		nowrap;
 }
-
 .artwork-grid img {
 	max-width:			100%;
 }
-
 .artwork img, .artwork-info {
 	max-width:			55%;
 }
-
 .artwork {
 	width:				100%;
 	margin-bottom:		15px;
 	text-align:			center;
 }
-
 .artwork-info {
 	margin:				0 auto;
 	text-align:			left;
 }
-
 .centered-span {
 	width:				100%;
 	text-align:			center;
 }
-
-.control-icon {
+.navigator-icon {
 	position:			fixed;
 }
-
-.control-icon i {
+.navigator-icon i {
 	font-size:			32px;
 }
-
-.control-left {
+.navigator-left {
 	top:				50%;
 	left:				10%;
 }
-
-.control-close {
+.navigator-close {
 	top:				15%;
 	right:				5%;
 }
-
-.control-right {
+.navigator-right {
 	top:				50%;
 	right:				10%;
 }
-
-.control-row {
+.navigator-row {
 	display:			none;
 	margin-top:			-15px;
 	font-size:			24px;
 }
-
-.control-row span {
+.navigator-row span {
 	display:			table-cell;
 }
+.dropdown-item:active {
+	background-color:	var(--altbgr);
+}
+.navbar {
+	padding:			0 12px !important;
+}
+.navbar-brand {
+	padding-top:		0 !important;
+	color:				var(--text) !important;
+	font-size:			32px;
+}
+.navbar-brand:hover {
+	color:				var(--link) !important;
+}
+.modal-dialog {
+	margin:				0 auto !important;
+	max-width:			100vw !important;
+	text-align:			center;
+}
+.modal-dialog img {
+	max-height:			100vh;
+}
 
-@media(min-width:768px) {
+#active-link {
+	color: 				var(--text) !important;
+}
+#vita-photo {
+	width:				100%;
+}
+#result-feedback {
+	color:				var(--warning);
+}
+#impressum-link {
+	text-align:			right;
+}
+#main-content {
+	padding:			30px 15px 60px;
+}
+#start-img {
+	margin-bottom:		15px;
+}
+
+@media(min-width: 768px) {
 	.separator {
 		display:		initial;
 	}
 }
 
-@media(max-width:576px) {
+@media(max-width: 576px) {
 	nav {
 		margin:			0 !important;
 	}
-
 	strong {
 		margin-right:	20px;
 	}
-	
+
 	.curriculum {
 		padding-left:	0 !important;
 	}
-
 	.curriculum .headline {
 		margin-left:	20%;
 	}
-
 	.curriculum .year {
 		width:			15%;
 		margin-right:	5%;
 	}
-
 	.curriculum .text {
 		width:			80%;
 	}
-
 	.curriculum .vita-img {
 		width:			20%;
 		margin-right:	5%;
 	}
-
 	.curriculum .vita-headline {
 		width:			75%;
 	}
-
 	.artwork-grid {
 		padding:		0;
 	}
-
 	.artwork img {
 		max-width:		100%;
 	}
-
 	.artwork-info {
 		max-width:		90%;
 	}
-
 	.artwork-title {
 		display:		block;
 	}
-
-	.control-row {
+	.navigator-row {
 		display:		table;
 	}
-
-	.control-icon {
+	.navigator-icon {
 		display:		none;
 	}
 
 	#vita-headline-text {
 		font-size:		14px;
 	}
-
 	#modal-link	{
 		pointer-events: none;
 	}
 }
 
-@media(min-width:577px) {
+@media(min-width: 577px) {
 	.header-content {
 		position:		relative;
 		min-height:		100%;
 	}
-
 	.bottom-content {
 		position:		absolute;
 		bottom:			0;
 		left:			0;
 	}
-
 	.curriculum {
 		margin-left:	5%;
 	}
-
 	.artwork-title {
 		margin-right:	4%;
 	}
-}
-
-.dropdown-item:active {
-	background-color:	var(--altbgr);
-}
-
-.navbar {
-	padding:			0 12px !important;
-}
-
-.navbar-brand {
-	padding-top:		0 !important;
-	color:				var(--text) !important;
-	font-size:			32px;
-}
-
-.navbar-brand:hover {
-	color:				var(--link) !important;
-}
-
-.modal-dialog {
-	margin:				0 auto !important;
-	max-width:			100vw !important;
-	text-align:			center;
-}
-
-.modal-dialog img {
-	max-height:			100vh;
-}
-
-#active-doc {
-	color: 				var(--text) !important;
-}
-
-#vita-photo {
-	width:				100%;
-}
-
-#return {
-	color:				var(--warning);
-}
-
-#impressum-link {
-	text-align:			right;
-}
-
-#main-content {
-	padding:			30px 15px 60px;
-}
-
-#start-img {
-	margin-bottom:		15px;
 }
