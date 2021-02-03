@@ -1,7 +1,7 @@
 <?php
 
 if(empty($_POST))
-    return;
+	return;
 
 $name = $_POST["name"];
 $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
@@ -19,19 +19,19 @@ HEADER;
 
 $confirmationMailContent =
 <<<HTML
-    <html>
-    <body>
-        <div style='padding:50px; font-family:sans-serif'>
-            Hallo $name,<br>
-            <br>vielen Dank, dass Sie mich kontaktiert haben. Ich werde mich sobald wie möglich bei Ihnen melden.<br>
-            <br>Ihre Nachricht an mich war:<br><br>
-            <b>Name:</b> $name<br>
-            <b>E-Mail:</b> $email<br>
-            <b>Nachricht:</b> $message<br><br><br>
-            Mit freundlichen Grüßen,<br>Marco Faisst
-        </div>
-    </body>
-    </html>
+	<html>
+	<body>
+		<div style='padding:50px; font-family:sans-serif'>
+			Hallo $name,<br>
+			<br>vielen Dank, dass Sie mich kontaktiert haben. Ich werde mich sobald wie möglich bei Ihnen melden.<br>
+			<br>Ihre Nachricht an mich war:<br><br>
+			<b>Name:</b> $name<br>
+			<b>E-Mail:</b> $email<br>
+			<b>Nachricht:</b> $message<br><br><br>
+			Mit freundlichen Grüßen,<br>Marco Faisst
+		</div>
+	</body>
+	</html>
 HTML;
 
 $confirmationMailContent = wordwrap($confirmationMailContent, 70);
@@ -50,16 +50,16 @@ HEADER;
 
 $mainMailContent =
 <<<HTML
-    <html>
-    <body>
-        <div style='padding:50px; font-family:sans-serif'>
-            Jemand hat eine Nachricht durch das Kontaktformular auf marcofaisst.com an dich versendet:<br><br>
-            <b>Name:</b> $name<br><br>
-            <b>E-Mail:</b> $email<br><br>
-            <b>Nachricht:</b> $message
-        </div>
-    </body>
-    </html>
+	<html>
+	<body>
+		<div style='padding:50px; font-family:sans-serif'>
+			Jemand hat eine Nachricht durch das Kontaktformular auf marcofaisst.com an dich versendet:<br><br>
+			<b>Name:</b> $name<br><br>
+			<b>E-Mail:</b> $email<br><br>
+			<b>Nachricht:</b> $message
+		</div>
+	</body>
+	</html>
 HTML;
 
 $mainMailContent = wordwrap($mainMailContent, 70);

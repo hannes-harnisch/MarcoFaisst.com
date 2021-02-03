@@ -13,5 +13,5 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteRule ^/*$ Code/Index.php
 RewriteRule ^([\w-]+)/*$ Code/Index.php?page=$1
-RewriteRule ^([\w-]+)/([\w-]+)/*$ Code/Index.php?page=$1&uri=$2
+RewriteRule ^([\w-]+)/([\w-]+)/*$ Code/Index.php?page=$1&artId=$2
 RewriteRule ^[\w-]+/[\w-]+/[\w-/]+$ Code/Index.php?page=fehler

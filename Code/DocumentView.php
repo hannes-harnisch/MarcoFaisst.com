@@ -1,14 +1,14 @@
 <?php
 
-require_once "Page.php";
+require_once "View.php";
 
-class DocumentPage extends Page
+class DocumentView extends View
 {
 	private string $docTitle;
 
-	public function __construct(string $pageArg)
+	public function __construct(string $page)
 	{
-		$this->docTitle = ucfirst($pageArg);
+		$this->docTitle = ucfirst($page);
 	}
 
 	public function renderTitle() : string

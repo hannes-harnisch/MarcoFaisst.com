@@ -1,22 +1,22 @@
 <?php
-require_once "ArtworkPage.php";
+require_once "ArtworkView.php";
 require_once "Constants.php";
-require_once "DocumentPage.php";
-require_once "Gallery.php";
-require_once "MainPage.php";
+require_once "DocumentView.php";
+require_once "GalleryView.php";
+require_once "HomeView.php";
 
-$pageArg = $_GET["page"] ?? null;
-$uriArg = $_GET["uri"] ?? null;
+$page = $_GET["page"] ?? null;
+$artId = $_GET["artId"] ?? null;
 
-$page;
+$view;
 if(empty($_GET))
-	$page = new MainPage();
-elseif(!empty($uriArg))
-	$page = new ArtworkPage($pageArg, $uriArg);
-elseif(in_array($pageArg, YEAR_GROUPS) || in_array($pageArg, NAVBAR_GALLERIES))
-	$page = new Gallery($pageArg);
+	$view = new HomeView();
+elseif(!empty($artId))
+	$view = new ArtworkView($page, $artId);
+elseif(in_array($page, YEAR_GROUPS) || in_array($page, NAVBAR_GALLERIES))
+	$view = new GalleryView($page);
 else
-	$page = new DocumentPage($pageArg);
+	$view = new DocumentView($page);
 ?>
 
 <!DOCTYPE html>
@@ -44,9 +44,9 @@ else
 	<title>
 
 		<?php
-		echo $page->renderTitle();
+		echo $view->renderTitle();
 
-		if(!$page instanceof MainPage)
+		if(!$view instanceof HomeView)
 			echo " | ";
 		?>
 
@@ -79,7 +79,7 @@ else
 					{
 						echo "<span class='separator'>|</span><li class='nav-item'><a ";
 						
-						if(strcmp($pageArg, $navbarLink) == 0)
+						if($page == $navbarLink)
 							echo "id='active-link' ";
 						$linkText = strtoupper($navbarLink);
 
@@ -94,14 +94,14 @@ else
 	<div id='main-content' class='container'>
 
 		<?php
-		set_error_handler(function($errno, $errstr, $errfile, $errline)
-		{
-		 	throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
-		});
+		// set_error_handler(function($errno, $errstr, $errfile, $errline)
+		// {
+		//  	throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+		// });
 
 		try
 		{
-			echo $page->renderBody();
+			echo $view->renderBody();
 		}
 		catch(Exception $e)
 		{

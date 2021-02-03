@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /vita
-Disallow: /kontakt
 Disallow: /impressum
-Disallow: /src/email.php
+Disallow: /Code/*
+Allow: /Code/Index.php

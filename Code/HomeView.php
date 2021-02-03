@@ -1,8 +1,8 @@
 <?php
 
-require_once "Page.php";
+require_once "View.php";
 
-class MainPage extends Page
+class HomeView extends View
 {
 	public function renderTitle() : string
 	{
