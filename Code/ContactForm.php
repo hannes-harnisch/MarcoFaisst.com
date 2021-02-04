@@ -5,7 +5,7 @@ if(empty($_POST))
 
 $name = $_POST["name"];
 $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-$message = $_POST["message"];
+$message = str_replace("\n", "<br>", $_POST["message"]);
 $version = phpversion();
 
 $confirmationHeader =
@@ -27,7 +27,8 @@ $confirmationMailContent =
 			<br>Ihre Nachricht an mich war:<br><br>
 			<b>Name:</b> $name<br>
 			<b>E-Mail:</b> $email<br>
-			<b>Nachricht:</b> $message<br><br><br>
+			<b>Nachricht:</b>
+			<br><br>$message<br><br><br>
 			Mit freundlichen Grüßen,<br>Marco Faisst
 		</div>
 	</body>
@@ -56,7 +57,8 @@ $mainMailContent =
 			Jemand hat eine Nachricht durch das Kontaktformular auf marcofaisst.com an dich versendet:<br><br>
 			<b>Name:</b> $name<br><br>
 			<b>E-Mail:</b> $email<br><br>
-			<b>Nachricht:</b> $message
+			<b>Nachricht:</b>
+			<br><br>$message
 		</div>
 	</body>
 	</html>

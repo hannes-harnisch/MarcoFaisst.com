@@ -203,8 +203,11 @@ textarea {
 #vita-photo {
 	width:				100%;
 }
-#result-feedback {
+#form-feedback {
 	color:				var(--warning);
+}
+#form-success {
+	color:				var(--text);
 }
 #impressum-link {
 	text-align:			right;
