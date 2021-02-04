@@ -1,5 +1,11 @@
 User-agent: *
-Allow: /
+Disallow: /2*/
+Disallow: /grafiken/
+Disallow: /zeichnungen/
 Disallow: /impressum
-Disallow: /Code/*
+Disallow: /Assets/
+Disallow: /Code/
+Disallow: /Docs/
+Disallow: /Private/
 Allow: /Code/Index.php
+Sitemap: https://marcofaisst.com/sitemap.xml
