@@ -1,7 +1,12 @@
 $(document).ready(function()
 {
-	$(".tooltip-E").replaceWith("<a data-toggle='tooltip' title='Einzelausstellung'>(E)</a>");
-	$(".tooltip-G").replaceWith("<a data-toggle='tooltip' title='Gruppenausstellung'>(G)</a>");
-	$(".tooltip-K").replaceWith("<a data-toggle='tooltip' title='Katalog'>(K)</a>");
-	$("[data-toggle='tooltip']").tooltip(); 
+	setTooltipAnchor("E", "Einzelausstellung");
+	setTooltipAnchor("G", "Gruppenausstellung");
+	setTooltipAnchor("K", "Katalog");
+	$("[data-toggle='tooltip']").tooltip();
 });
+
+function setTooltipAnchor(type, content)
+{
+	$(`.tooltip-${type}`).replaceWith(`<a data-toggle='tooltip' title='${content}'>(${type})</a>`);
+}

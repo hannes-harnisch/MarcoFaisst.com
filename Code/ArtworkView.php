@@ -154,7 +154,7 @@ HTML;
 		$body .=
 <<<HTML
 				</div></div></div></div>
-				<div class='modal fade' id='work-display-modal'>
+				<div id='work-display-modal' class='modal fade'>
 					<div class='modal-dialog'>
 						<img src='/Assets/$this->table/$id.jpg' alt='$title'>
 					</div>

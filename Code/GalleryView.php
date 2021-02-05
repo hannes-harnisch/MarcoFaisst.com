@@ -26,7 +26,7 @@ class GalleryView extends View
 		foreach($this->queryArtworks() as $work)
 		{
 			$id = $work["id"];
-			$title = $work["title"];
+			$title = $work["title"] ?? UNTITLED;
 			$body .=
 <<<HTML
 					<div class='col-12 col-sm-4 artwork-grid'>

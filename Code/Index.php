@@ -45,15 +45,18 @@ else
 <!DOCTYPE html>
 <html lang='de'>
 <head>
+	<script async src='https://www.googletagmanager.com/gtag/js?id=UA-118651392-1'></script>
+	<script src='/Code/JS/GoogleAnalytics.js'></script>
 	<meta charset='UTF-8'/>
 	<meta name='description' content='Freischaffender Maler und Grafiker.
-									 Ansässig in Stuttgart, geboren und aufgewachsen in der Schweiz.'/>
+									  Ansässig in Stuttgart, geboren und aufgewachsen in der Schweiz.'/>
 	<meta name='keywords' content='art,contemporary art,gemälde,painting,stuttgart,stuttgart art,kunst,malerei,grafik,
-								  graphik,grafiken,graphiken,drawing,drawings,maler,grafiker,graphiker,painter,
-								  künstler,artist,paint,bild,picture,image,marco,faisst,ausstellungen,ausstellung,
-								  freischaffend,freischaffender,freelancing,freelancer'/>
+								   graphik,grafiken,graphiken,drawing,drawings,maler,grafiker,graphiker,painter,
+								   künstler,artist,paint,bild,picture,image,marco,faisst,ausstellungen,ausstellung,
+								   freischaffend,freischaffender,freelancing,freelancer'/>
 	<meta name='viewport' content='width=device-width,initial-scale=1'/>
 	<meta name='author' content='Marco Faisst'/>
+	<meta name='google-site-verification' content='BldZPYzJEc-4iJ2R1_VWJ7rPXpsgQaCQ3GDoHA1m9C0'/>
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'/>
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css'/>
 	<link rel='stylesheet' href='/Docs/Style.css'/>
@@ -62,8 +65,6 @@ else
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js'></script>
 	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js'></script>
 	<script src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js'></script>
-	<script async src='https://www.googletagmanager.com/gtag/js?id=UA-118651392-1'></script>
-	<script src='/Code/JS/GoogleAnalytics.js'></script>
 	<title>
 
 		<?php
