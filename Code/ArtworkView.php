@@ -137,8 +137,8 @@ HTML;
 				</div></div>
 				<div class='row'><div class='artwork'>
 					<div class='artwork-info'>
-						<strong class='artwork-title'>$title</strong><br>
-						<div class='float-right'>$year, $medium
+						<strong class='artwork-title'>$title</strong><br id='artwork-info-linebreak'>
+						<div id='artwork-misc-info' class='float-right'>$year, $medium
 HTML;
 
 		if($base !== null)

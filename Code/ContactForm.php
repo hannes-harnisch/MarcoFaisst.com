@@ -3,9 +3,17 @@
 if(empty($_POST))
 	return;
 
-$name = $_POST["name"];
+const MAX_FIELD_LENGTH		= 100;
+const MAX_MESSAGE_LENGTH	= 3000;
+
+$name = substr($_POST["name"], 0, MAX_FIELD_LENGTH);
+
 $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-$message = str_replace("\n", "<br>", $_POST["message"]);
+$email = substr($email, 0, MAX_FIELD_LENGTH);
+
+$message = substr($_POST["message"], 0, MAX_MESSAGE_LENGTH);
+$message = str_replace("\n", "<br>", $message);
+
 $version = phpversion();
 
 $confirmationHeader =
