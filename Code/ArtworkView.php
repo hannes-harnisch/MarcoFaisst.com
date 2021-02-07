@@ -131,7 +131,7 @@ HTML;
 		$body .=
 <<<HTML
 				<div class='row'><div class='artwork'>
-					<a id='modal-link' href='#' data-toggle='modal' data-target='#work-display-modal'>
+					<a id='modal-link' href='#' data-toggle='modal' data-target='#artwork-modal'>
 						<img src='/Assets/$this->table/$id.jpg' alt='$title'>
 					</a>
 				</div></div>
@@ -154,7 +154,7 @@ HTML;
 		$body .=
 <<<HTML
 				</div></div></div></div>
-				<div id='work-display-modal' class='modal fade'>
+				<div id='artwork-modal' class='modal fade'>
 					<div class='modal-dialog'>
 						<img src='/Assets/$this->table/$id.jpg' alt='$title'>
 					</div>

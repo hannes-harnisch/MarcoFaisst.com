@@ -48,7 +48,7 @@ a:hover {
 nav {
 	background-color:	var(--bgr) !important;
 	border-top:			1px solid var(--link);
-	margin:				3% 0;
+	margin:				2em 0;
 }
 nav li {
 	margin:				0 5px;
@@ -119,18 +119,17 @@ textarea {
 	width:				87%;
 }
 .vertical-aligner {
-	display:			inline-block;
 	height:				100%;
 	vertical-align:		middle;
 }
-.artwork-grid {
+.gallery-cell {
 	margin-bottom:		50px;
 	padding:			0 25px;
 	text-align:			center;
 	white-space:		nowrap;
 }
-.artwork-grid img {
-	max-width:			100%;
+.gallery-cell img {
+	width:				100%;
 }
 .artwork img, .artwork-info {
 	max-width:			60%;
@@ -177,8 +176,9 @@ textarea {
 .dropdown-item:active {
 	background-color:	var(--altbgr);
 }
-.navbar {
-	padding:			0 12px !important;
+.row {
+	margin-left: 		0 !important;
+	margin-right: 		0 !important;
 }
 .navbar-brand {
 	padding-top:		0 !important;
@@ -219,13 +219,34 @@ textarea {
 	margin-bottom:		15px;
 }
 
-@media(min-width: 768px) {
+@media(min-width: 769px) {
+	.navbar-brand {
+		font-size:		32px;
+	}
+	.header-content {
+		position:		relative;
+		min-height:		100%;
+	}
+	.bottom-content {
+		position:		absolute;
+		bottom:			0;
+		left:			0;
+	}
+	.curriculum {
+		margin-left:	5%;
+	}
+	.artwork-title {
+		margin-right:	4%;
+	}
 	.separator {
 		display:		initial;
 	}
+	.vertical-aligner {
+		display:		inline-block;
+	}
 }
 
-@media(max-width: 576px) {
+@media(max-width: 768px) {
 	nav {
 		margin:			0 !important;
 	}
@@ -259,7 +280,7 @@ textarea {
 	.curriculum .vita-headline {
 		width:			75%;
 	}
-	.artwork-grid {
+	.gallery-cell {
 		padding:		0;
 	}
 	.artwork img {
@@ -289,26 +310,5 @@ textarea {
 	}
 	#modal-link	{
 		pointer-events: none;
-	}
-}
-
-@media(min-width: 577px) {
-	.navbar-brand {
-		font-size:		32px;
-	}
-	.header-content {
-		position:		relative;
-		min-height:		100%;
-	}
-	.bottom-content {
-		position:		absolute;
-		bottom:			0;
-		left:			0;
-	}
-	.curriculum {
-		margin-left:	5%;
-	}
-	.artwork-title {
-		margin-right:	4%;
 	}
 }

@@ -29,7 +29,7 @@ class GalleryView extends View
 			$title = $work["title"] ?? UNTITLED;
 			$body .=
 <<<HTML
-					<div class='col-12 col-sm-4 artwork-grid'>
+					<div class='gallery-cell col-12 col-sm-4'>
 						<span class='vertical-aligner'></span>
 						<a href='/$this->page/$id'>
 							<img src='/Assets/{$this->table}Preview/$id.jpg' alt='$title'>
