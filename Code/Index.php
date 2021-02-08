@@ -16,9 +16,9 @@ $artId = $_GET["artId"] ?? null;
 $view;
 if(empty($_GET))
 	$view = new DocumentView(HOME_VIEW);
-elseif(!empty($artId) && View::isValidPage($page))
+elseif(View::relatesToGallery($page) && !empty($artId))
 	$view = new ArtworkView($page, $artId);
-elseif(View::isValidPage($page))
+elseif(View::relatesToGallery($page))
 	$view = new GalleryView($page);
 else
 	$view = new DocumentView($page);

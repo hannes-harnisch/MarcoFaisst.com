@@ -23,29 +23,19 @@ class GalleryView extends View
 		$count = 1;
 		$body = "<div class='row'>";
 
-		foreach($this->queryArtworks() as $work)
+		foreach($this->queryArtworkIds() as $id)
 		{
-			$id = $work["id"];
-			$title = $work["title"] ?? UNTITLED;
-			$body .=
-<<<HTML
-					<div class='gallery-cell col-12 col-sm-4'>
-						<span class='vertical-aligner'></span>
-						<a href='/$this->page/$id'>
-							<img src='/Assets/{$this->table}Preview/$id.jpg' alt='$title'>
-						</a>
-					</div>
-HTML;
-
+			$body .= $this->getGalleryCell($id["id"]);
 			if($count % 3 == 0)
 				$body .= "</div><div class='row'>";
+
 			$count++;
 		}
 
-		return $body."</div>";
+		return $body . "</div>";
 	}
 
-	private function queryArtworks() : array
+	private function queryArtworkIds() : array
 	{
 		$years;
 		if($this->table == Database::PAINTING_TABLE)
@@ -53,7 +43,19 @@ HTML;
 		else
 			$years = [Database::MIN_YEAR, Database::MAX_YEAR];
 
-		return Database::getIdsAndTitles($this->table, $years[0], $years[1]);
+		return Database::getIdsWithinYears($this->table, $years[0], $years[1]);
+	}
+
+	private function getGalleryCell(string &$id) : string
+	{
+		return <<<HTML
+					<div class='gallery-cell col-12 col-sm-4'>
+						<span class='vertical-aligner'></span>
+						<a href='/$this->page/$id'>
+							<img src='/Assets/{$this->table}Preview/$id.jpg' alt='$id'>
+						</a>
+					</div>
+HTML;
 	}
 }
 

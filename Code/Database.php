@@ -33,13 +33,12 @@ class Database
 		self::$pdo = new PDO(self::DSN, DatabaseCredentials::USER, DatabaseCredentials::PASSWORD, self::PDO_OPTIONS);
 	}
 
-	public static function getIdsAndTitles(string &$table, int $fromYear, int $toYear) : array
+	public static function getIdsWithinYears(string &$table, int $fromYear, int $toYear) : array
 	{
 		static $queries;
-		if($queries === null)
-			self::prepareQueriesPerArtworkTable($queries,
+		self::prepareQueriesPerArtworkTable($queries,
 <<<SQL
-				SELECT id, title FROM %s WHERE year BETWEEN ? AND ? ORDER BY ordinal DESC
+			SELECT id FROM %s WHERE year BETWEEN ? AND ? ORDER BY ordinal DESC
 SQL);
 		$query = $queries[$table];
 		$query->execute([$fromYear, $toYear]);
@@ -49,10 +48,9 @@ SQL);
 	public static function getTitle(string &$table, string &$id) : ?string
 	{
 		static $queries;
-		if($queries === null)
-			self::prepareQueriesPerArtworkTable($queries,
+		self::prepareQueriesPerArtworkTable($queries,
 <<<SQL
-				SELECT title FROM %s WHERE id = ?
+			SELECT title FROM %s WHERE id = ?
 SQL);
 		$query = $queries[$table];
 		$query->execute([$id]);
@@ -62,10 +60,9 @@ SQL);
 	public static function artworkExists(string &$table, string &$id) : bool
 	{
 		static $queries;
-		if($queries === null)
-			self::prepareQueriesPerArtworkTable($queries,
+		self::prepareQueriesPerArtworkTable($queries,
 <<<SQL
-				SELECT COUNT(*) FROM %s WHERE id = ?
+			SELECT COUNT(*) FROM %s WHERE id = ?
 SQL);
 		$query = $queries[$table];
 		$query->execute([$id]);
@@ -75,10 +72,9 @@ SQL);
 	public static function getOrdinal(string &$table, string &$id) : int
 	{
 		static $queries;
-		if($queries === null)
-			self::prepareQueriesPerArtworkTable($queries,
+		self::prepareQueriesPerArtworkTable($queries,
 <<<SQL
-				SELECT ordinal FROM %s WHERE id = ?
+			SELECT ordinal FROM %s WHERE id = ?
 SQL);
 		$query = $queries[$table];
 		$query->execute([$id]);
@@ -88,11 +84,10 @@ SQL);
 	public static function getArtworkWithNeighbors(string &$table, int $ordinal, int $fromYear, int $toYear) : array
 	{
 		static $queries;
-		if($queries === null)
-			self::prepareQueriesPerArtworkTable($queries,
+		self::prepareQueriesPerArtworkTable($queries,
 <<<SQL
-				(SELECT * FROM %s WHERE ordinal < ? AND year BETWEEN ? AND ? ORDER BY ordinal DESC LIMIT 1) UNION
-				(SELECT * FROM %s WHERE ordinal >= ? AND year BETWEEN ? AND ? ORDER BY ordinal ASC LIMIT 2)
+			(SELECT * FROM %s WHERE ordinal < ? AND year BETWEEN ? AND ? ORDER BY ordinal DESC LIMIT 1) UNION
+			(SELECT * FROM %s WHERE ordinal >= ? AND year BETWEEN ? AND ? ORDER BY ordinal ASC LIMIT 2)
 SQL);
 		$query = $queries[$table];
 		$query->execute([$ordinal, $fromYear, $toYear, $ordinal, $fromYear, $toYear]);
@@ -101,6 +96,9 @@ SQL);
 
 	private static function prepareQueriesPerArtworkTable(?array &$queries, string $sql)
 	{
+		if($queries !== null)
+			return;
+
 		foreach(self::ARTWORK_TABLES as $table)
 		{
 			$sqlWithTable = sprintf($sql, $table, $table);

@@ -8,7 +8,7 @@ abstract class View
 	abstract public function renderTitle() : string;
 	abstract public function renderBody() : string;
 
-	public static function isValidPage(string &$page) : bool
+	public static function relatesToGallery(string &$page) : bool
 	{
 		return in_array($page, YEAR_GROUPS) || in_array($page, NAVBAR_GALLERIES);
 	}

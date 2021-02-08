@@ -26,8 +26,11 @@ class ArtworkView extends View
 		$this->assignArtworkDataAndNeighborIds($prevId, $artwork, $nextId);
 
 		$body = "";
-		$this->renderNavigators($body, $prevId, $nextId);
-		$this->renderArtwork($body, $artwork);
+		$this->renderDesktopNavigators($body, $prevId, $nextId);
+		$this->renderMobileNavigators($body, $prevId, $nextId);
+
+		$body .= $this->getImage($artwork["id"]);
+		$this->renderArtworkInfo($body, $artwork);
 		return $body;
 	}
 
@@ -64,82 +67,135 @@ class ArtworkView extends View
 		return Database::getArtworkWithNeighbors($this->table, $ordinal, $years[0], $years[1]);
 	}
 
-	private function renderNavigators(string &$body, ?string &$prevId, ?string &$nextId)
+	private function renderDesktopNavigators(string &$body, ?string &$prevId, ?string &$nextId)
 	{
-		$body .=
-<<<HTML
-				<a class='navigator-icon navigator-close' href='/$this->page'>
-					<i class='fa fa-close'></i>
-				</a>
-HTML;
-
 		if($prevId !== null)
-			$body .=
-<<<HTML
+			$body .= $this->getLeftDesktopNavigator($prevId);
+
+		$body .= $this->getDesktopReturnNavigator();
+
+		if($nextId !== null)
+			$body .= $this->getRightDesktopNavigator($nextId);
+	}
+
+	private function getLeftDesktopNavigator(string &$prevId) : string
+	{
+		return <<<HTML
 					<a class='navigator-icon navigator-left' href='/$this->page/$prevId'>
 						<i class='fa fa-chevron-left'></i>
 					</a>
 HTML;
+	}
 
-		if($nextId !== null)
-			$body .=
-<<<HTML
+	private function getDesktopReturnNavigator() : string
+	{
+		return <<<HTML
+					<a class='navigator-icon navigator-return' href='/$this->page'>
+						<i class='fa fa-close'></i>
+					</a>
+HTML;
+	}
+
+	private function getRightDesktopNavigator(string &$nextId) : string
+	{
+		return <<<HTML
 					<a class='navigator-icon navigator-right' href='/$this->page/$nextId'>
 						<i class='fa fa-chevron-right'></i>
 					</a>
 HTML;
-		$body .= "<div class='navigator-row'><span>";
-
-		if($prevId !== null)
-			$body .=
-<<<HTML
-					<a href='/$this->page/$prevId'>
-						<i class='fa fa-chevron-left'></i>
-					</a>
-HTML;
-
-		$body .=
-<<<HTML
-				</span><span class='centered-span'>
-					<a href='/$this->page'>
-						<i class='fa fa-close'></i>
-					</a>
-				</span><span>
-HTML;
-
-		if($nextId !== null)
-			$body .=
-<<<HTML
-					<a href='/$this->page/$nextId'>
-						<i class='fa fa-chevron-right'></i>
-					</a>
-HTML;
-
-		$body .= "</span></div>";
 	}
 
-	private function renderArtwork(string &$body, array &$artwork)
+	private function renderMobileNavigators(string &$body, ?string &$prevId, ?string &$nextId)
+	{
+		$body .= "<div class='navigator-row'>";
+
+		if($prevId !== null)
+			$body .= $this->getLeftMobileNavigator($prevId);
+
+		$body .= $this->getMobileReturnNavigator();
+
+		if($nextId !== null)
+			$body .= $this->getRightMobileNavigator($nextId);
+
+		$body .= "</div>";
+	}
+
+	private function getLeftMobileNavigator(string &$prevId) : string
+	{
+		return <<<HTML
+					<span>
+						<a href='/$this->page/$prevId'>
+							<i class='fa fa-chevron-left'></i>
+						</a>
+					</span>
+HTML;
+	}
+
+	private function getMobileReturnNavigator() : string
+	{
+		return <<<HTML
+					<span class='centered-span'>
+						<a href='/$this->page'>
+							<i class='fa fa-close'></i>
+						</a>
+					</span>
+HTML;
+	}
+
+	private function getRightMobileNavigator(string &$nextId) : string
+	{
+		return <<<HTML
+					<span>
+						<a href='/$this->page/$nextId'>
+							<i class='fa fa-chevron-right'></i>
+						</a>
+					</span>
+HTML;
+	}
+
+	private function getImage(string &$id) : string
+	{
+		return <<<HTML
+					<div class='row'>
+						<div class='artwork'>
+							<a id='modal-link' href='#' data-toggle='modal' data-target='#artwork-modal'>
+								<img src='/Assets/$this->table/$id.jpg' alt='$id'>
+							</a>
+						</div>
+					</div>
+					<div id='artwork-modal' class='modal fade'>
+						<div class='modal-dialog'>
+							<img src='/Assets/$this->table/$id.jpg' alt='$id'>
+						</div>
+					</div>
+HTML;
+	}
+
+	private function renderArtworkInfo(string &$body, array &$artwork)
 	{
 		$title = $artwork["title"] ?? UNTITLED;
 		$year = $artwork["year"];
 		$medium = $artwork["medium"];
-		$base = $artwork["base"] ?? null;
-		$id = $artwork["id"];
-		$height = $artwork["height"];
-		$width = $artwork["width"];
 
 		$body .=
 <<<HTML
-				<div class='row'><div class='artwork'>
-					<a id='modal-link' href='#' data-toggle='modal' data-target='#artwork-modal'>
-						<img src='/Assets/$this->table/$id.jpg' alt='$title'>
-					</a>
-				</div></div>
-				<div class='row'><div class='artwork'>
-					<div class='artwork-info'>
-						<strong class='artwork-title'>$title</strong><br id='artwork-info-linebreak'>
-						<div id='artwork-misc-info' class='float-right'>$year, $medium
+				<div class='row'>
+					<div class='artwork'>
+						<div class='artwork-info'>
+							<strong class='artwork-title'>$title</strong>
+							<br id='artwork-info-linebreak'>
+							<div id='artwork-misc-info' class='float-right'>$year, $medium
 HTML;
+
+		$this->renderBaseAndSize($body, $artwork);
+		$body .= "</div></div></div></div>";
+	}
+
+	private function renderBaseAndSize(string &$body, array &$artwork)
+	{
+		$base = $artwork["base"] ?? null;
+		$height = $artwork["height"];
+		$width = $artwork["width"];
 
 		if($base !== null)
 			$body .= " auf $base";
@@ -150,16 +206,6 @@ HTML;
 			$width = str_replace(".", ",", $width);
 			$body .= ", $height × $width cm";
 		}
-
-		$body .=
-<<<HTML
-				</div></div></div></div>
-				<div id='artwork-modal' class='modal fade'>
-					<div class='modal-dialog'>
-						<img src='/Assets/$this->table/$id.jpg' alt='$title'>
-					</div>
-				</div>
-HTML;
 	}
 }
 
