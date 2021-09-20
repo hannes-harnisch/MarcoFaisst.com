@@ -43,7 +43,12 @@ class GalleryView extends View
 		else
 			$years = [Database::MIN_YEAR, Database::MAX_YEAR];
 
-		return Database::getIdsWithinYears($this->table, $years[0], $years[1]);
+		$from = $years[0];
+		if(count($years) == 1)
+			$to = $years[0];
+		else
+			$to = $years[1];
+		return Database::getIdsWithinYears($this->table, $from, $to);
 	}
 
 	private function getGalleryCell(string &$id) : string

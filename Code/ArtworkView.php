@@ -64,7 +64,12 @@ class ArtworkView extends View
 		else
 			$years = [Database::MIN_YEAR, Database::MAX_YEAR];
 
-		return Database::getArtworkWithNeighbors($this->table, $ordinal, $years[0], $years[1]);
+		$from = $years[0];
+		if(count($years) == 1)
+			$to = $years[0];
+		else
+			$to = $years[1];
+		return Database::getArtworkWithNeighbors($this->table, $ordinal, $from, $to);
 	}
 
 	private function renderDesktopNavigators(string &$body, ?string &$prevId, ?string &$nextId)
@@ -194,18 +199,37 @@ HTML;
 	private function renderBaseAndSize(string &$body, array &$artwork)
 	{
 		$base = $artwork["base"] ?? null;
-		$height = $artwork["height"];
-		$width = $artwork["width"];
+		$height = str_replace(".", ",", $artwork["height"]);
+		$width = str_replace(".", ",", $artwork["width"]);
+
+		$bounds_prefix = null;
+		$bounds_prefix2 = null;
+		$height2 = null;
+		$width2 = null;
+		if($this->table == Database::ILLUSTRATION_TABLE)
+		{
+			$bounds_prefix = $artwork["bounds_prefix"];
+			$bounds_prefix2 = $artwork["bounds_prefix2"];
+			$height2 = str_replace(".", ",", $artwork["height2"]);
+			$width2 = str_replace(".", ",", $artwork["width2"]);
+		}
 
 		if($base !== null)
 			$body .= " auf $base";
 
+		if($bounds_prefix !== null)
+			$body .= "<br>$bounds_prefix";
+
 		if($height != 0 && $width != 0)
 		{
-			$height = str_replace(".", ",", $height);
-			$width = str_replace(".", ",", $width);
-			$body .= ", $height × $width cm";
+			if($bounds_prefix === null)
+				$body .= ", ";
+
+			$body .= " $height × $width cm";
 		}
+
+		if($bounds_prefix2 !== null)
+			$body .= "<br>$bounds_prefix2 $height2 × $width2 cm";
 	}
 }
 
