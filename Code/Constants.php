@@ -33,4 +33,18 @@ const NAVBAR_GALLERIES	=
 
 const UNTITLED			= "ohne Titel";
 
+const KEYWORDS			=
+[
+	"%%EMAIL%%"			=> "mojkag@bluemail.ch",
+	"%%PHONENUMBER%%"	=> "+49 176 78420538",
+	"%%ADDRESS%%"		=>
+<<<HTML
+	<p>
+		Marco Faisst<br>
+		Böblinger Straße 51<br>
+		70199 Stuttgart
+	</p>
+HTML
+];
+
 ?>

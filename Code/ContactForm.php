@@ -1,5 +1,7 @@
 <?php
 
+require_once "Constants.php";
+
 if(empty($_POST))
 	return;
 
@@ -74,9 +76,8 @@ HTML;
 
 $mainMailContent = wordwrap($mainMailContent, 70);
 
-const ARTIST_EMAIL = "mojkag@bluemail.ch";
 const ARTIST_EMAIL_SUBJECT = "Nachricht vom Kontaktformular deiner Webseite";
-$mainSentStatus = mail(ARTIST_EMAIL, ARTIST_EMAIL_SUBJECT, $mainMailContent, $mainHeader);
+$mainSentStatus = mail(KEYWORDS["%%EMAIL%%"], ARTIST_EMAIL_SUBJECT, $mainMailContent, $mainHeader);
 
 echo $confirmationSentStatus && $mainSentStatus;
 

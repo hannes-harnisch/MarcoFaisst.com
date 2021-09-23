@@ -1,5 +1,6 @@
 <?php
 
+require_once "Constants.php";
 require_once "View.php";
 
 class DocumentView extends View
@@ -18,7 +19,10 @@ class DocumentView extends View
 
 	public function renderBody() : string
 	{
-		return file_get_contents("../Docs/$this->docTitle.htm");
+		$body = file_get_contents("../Docs/$this->docTitle.htm");
+		foreach(KEYWORDS as $keyword => $replacement)
+			$body = str_replace($keyword, $replacement, $body);
+		return $body;
 	}
 }
 
