@@ -3,7 +3,8 @@
 const YEAR_SEPARATOR	= "-";
 const YEAR_GROUPS		=
 [
-	"2021".YEAR_SEPARATOR."2023",
+	"2023".YEAR_SEPARATOR."2024",
+	"2021".YEAR_SEPARATOR."2022",
 	"2019".YEAR_SEPARATOR."2020",
 	"2017".YEAR_SEPARATOR."2018",
 	"2015".YEAR_SEPARATOR."2016",
@@ -13,7 +14,7 @@ const YEAR_GROUPS		=
 
 const HOME_VIEW			= "start";
 const ILLUSTRATION_VIEW = "grafiken";
-const DRAWING_VIEW		= "zeichnungen";
+const DRAWING_VIEW		= "papierarbeiten";
 const ERROR_VIEW		= "fehler";
 
 const NAVBAR_LINKS		=
