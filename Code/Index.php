@@ -14,12 +14,15 @@ $page = $_GET["page"] ?? null;
 $artId = $_GET["artId"] ?? null;
 
 $view;
-if(empty($_GET))
+if(empty($_GET) || empty($page))
 	$view = new DocumentView(HOME_VIEW);
-elseif(View::relatesToGallery($page) && !empty($artId))
-	$view = new ArtworkView($page, $artId);
 elseif(View::relatesToGallery($page))
-	$view = new GalleryView($page);
+{
+    if(empty($artId))
+	    $view = new GalleryView($page);
+	else
+	    $view = new ArtworkView($page, $artId);
+}
 else
 	$view = new DocumentView($page);
 
@@ -120,7 +123,7 @@ else
 	</div>
 	<footer>
 		<div class='container'>
-			<span>© 2020 Marco Faisst</span>
+			<span>© 2025 Marco Faisst</span>
 			<span id='impressum-link'>
 				<a href='/impressum'>Impressum</a>
 			</span>

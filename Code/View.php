@@ -8,12 +8,12 @@ abstract class View
 	abstract public function renderTitle() : string;
 	abstract public function renderBody() : string;
 
-	public static function relatesToGallery(string &$page) : bool
+	public static function relatesToGallery(string $page) : bool
 	{
 		return in_array($page, YEAR_GROUPS) || in_array($page, NAVBAR_GALLERIES);
 	}
 
-	protected static function matchViewToTable(string &$page) : string
+	protected static function matchViewToTable(string $page) : string
 	{
 		return match($page)
 		{
